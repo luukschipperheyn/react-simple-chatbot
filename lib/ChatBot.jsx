@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
 import Random from 'random-id';
 import { CustomStep, OptionsStep, TextStep } from './steps_components';
@@ -20,6 +20,10 @@ import Recognition from './recognition';
 import { ChatIcon, CloseIcon, SubmitIcon, MicIcon } from './icons';
 import { isMobile } from './utils';
 import { speakFn } from './speechSynthesis';
+
+import Keyboard from 'react-simple-keyboard';
+import GlobalStyle from './common/globalStyle';
+
 
 class ChatBot extends Component {
   /* istanbul ignore next */
@@ -51,7 +55,8 @@ class ChatBot extends Component {
       inputInvalid: false,
       speaking: false,
       recognitionEnable: props.recognitionEnable && Recognition.isSupported(),
-      defaultUserSettings: {}
+      defaultUserSettings: {},
+      focused: false
     };
 
     this.speak = speakFn(props.speechSynthesis);
@@ -427,6 +432,11 @@ class ChatBot extends Component {
       this.submitUserMessage();
     }
   };
+  handleKeyboardPress = key => {
+    if (key === '{enter}') {
+      this.submitUserMessage();
+    }
+  };
 
   handleSubmitButton = () => {
     const { speaking, recognitionEnable } = this.state;
@@ -596,7 +606,8 @@ class ChatBot extends Component {
       opened,
       renderedSteps,
       speaking,
-      recognitionEnable
+      recognitionEnable,
+      focused
     } = this.state;
     const {
       className,
@@ -650,8 +661,13 @@ class ChatBot extends Component {
 
     const inputAttributesOverride = currentStep.inputAttributes || inputAttributes;
 
+    const setInputValue = inputValue => this.setState({ inputValue });
+
+    const setFocused = focused => this.setState({focused})
+
     return (
       <div className={`rsc ${className}`}>
+        <GlobalStyle />
         {floating && (
           <FloatButton
             className="rsc-float-button"
@@ -697,6 +713,8 @@ class ChatBot extends Component {
                 invalid={inputInvalid}
                 disabled={disabled}
                 hasButton={!hideSubmitButton}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
                 {...inputAttributesOverride}
               />
             )}
@@ -717,6 +735,9 @@ class ChatBot extends Component {
             </div>
           </Footer>
         </ChatBotContainer>
+        <div className={ `keyboard-container ${focused ? "open" : "" }`}>
+          <Keyboard onKeyPress={this.handleKeyboardPress} preventMouseDownDefault={true} onChange={value => { setInputValue(value); }} onClick={e => { console.log(e, this.state.input); this.state.input.focus(); }} />
+        </div>
       </div>
     );
   }
