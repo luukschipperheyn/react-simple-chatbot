@@ -441,6 +441,7 @@ class ChatBot extends Component {
       this.submitUserMessage();
       if (this.input) { 
         this.input.blur();
+        this.setState({ focused: false });
       }
     }
   };

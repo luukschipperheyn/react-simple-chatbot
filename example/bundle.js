@@ -522,6 +522,12 @@ var ChatBot = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "handleKeyboardPress", function (key) {
       if (key === '{enter}') {
         _this.submitUserMessage();
+        if (_this.input) {
+          _this.input.blur();
+          _this.setState({
+            focused: false
+          });
+        }
       }
     });
     _defineProperty(_assertThisInitialized(_this), "handleSubmitButton", function () {
