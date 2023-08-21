@@ -439,6 +439,9 @@ class ChatBot extends Component {
   handleKeyboardPress = key => {
     if (key === '{enter}') {
       this.submitUserMessage();
+      if (this.input) { 
+        this.input.blur();
+      }
     }
   };
 
