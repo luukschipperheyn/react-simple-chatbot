@@ -661,9 +661,11 @@ class ChatBot extends Component {
 
     const inputAttributesOverride = currentStep.inputAttributes || inputAttributes;
 
-    const setInputValue = value => this.setState({ value });
+    const setInputValue = value => this.setState({ inputValue: value });
 
-    const setFocused = value => this.setState({ value });
+    const setFocused = value => {
+      this.setState({ focused: value });
+    }
 
     return (
       <div className={`rsc ${className}`}>
