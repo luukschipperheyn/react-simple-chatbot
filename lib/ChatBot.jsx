@@ -30,6 +30,7 @@ class ChatBot extends Component {
 
     this.content = null;
     this.input = null;
+    this.keyboard = null;
 
     this.supportsScrollBehavior = false;
 
@@ -39,6 +40,10 @@ class ChatBot extends Component {
 
     this.setInputRef = element => {
       this.input = element;
+    };
+
+    this.setKeyboardRef = element => {
+      this.keyboard = element;
     };
 
     this.state = {
@@ -468,6 +473,8 @@ class ChatBot extends Component {
       renderedSteps.push(currentStep);
       previousSteps.push(currentStep);
 
+      this.keyboard.setInput("");
+
       this.setState(
         {
           currentStep,
@@ -739,6 +746,7 @@ class ChatBot extends Component {
         </ChatBotContainer>
         <div className={`keyboard-container ${focused ? 'open' : ''}`}>
           <Keyboard
+            keyboardRef={this.setKeyboardRef}
             onKeyPress={this.handleKeyboardPress}
             preventMouseDownDefault
             onChange={value => {

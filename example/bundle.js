@@ -555,6 +555,7 @@ var ChatBot = /*#__PURE__*/function (_Component) {
         currentStep = _extends({}, defaultUserSettings, currentStep, step);
         renderedSteps.push(currentStep);
         previousSteps.push(currentStep);
+        _this.keyboard.setInput("");
         _this.setState({
           currentStep: currentStep,
           renderedSteps: renderedSteps,
@@ -666,12 +667,16 @@ var ChatBot = /*#__PURE__*/function (_Component) {
     });
     _this.content = null;
     _this.input = null;
+    _this.keyboard = null;
     _this.supportsScrollBehavior = false;
     _this.setContentRef = function (element) {
       _this.content = element;
     };
     _this.setInputRef = function (element) {
       _this.input = element;
+    };
+    _this.setKeyboardRef = function (element) {
+      _this.keyboard = element;
     };
     _this.state = {
       renderedSteps: [],
@@ -916,6 +921,7 @@ var ChatBot = /*#__PURE__*/function (_Component) {
       }, icon)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "keyboard-container ".concat(focused ? 'open' : '')
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_simple_keyboard__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        keyboardRef: this.setKeyboardRef,
         onKeyPress: this.handleKeyboardPress,
         preventMouseDownDefault: true,
         onChange: function onChange(value) {
