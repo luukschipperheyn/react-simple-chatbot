@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Keyboard from 'react-simple-keyboard';
-import GlobalStyle from './common/globalStyle';
 import PropTypes from 'prop-types';
 import Random from 'random-id';
+import GlobalStyle from './common/globalStyle';
 import { CustomStep, OptionsStep, TextStep } from './steps_components';
 import schema from './schemas/schema';
 import * as storage from './storage';
