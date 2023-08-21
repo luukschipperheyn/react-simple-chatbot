@@ -430,6 +430,7 @@ class ChatBot extends Component {
       this.submitUserMessage();
     }
   };
+
   handleKeyboardPress = key => {
     if (key === '{enter}') {
       this.submitUserMessage();
@@ -599,6 +600,7 @@ class ChatBot extends Component {
     const {
       currentStep,
       disabled,
+      input,
       inputInvalid,
       inputValue,
       opened,
@@ -659,9 +661,9 @@ class ChatBot extends Component {
 
     const inputAttributesOverride = currentStep.inputAttributes || inputAttributes;
 
-    const setInputValue = inputValue => this.setState({ inputValue });
+    const setInputValue = value => this.setState({ value });
 
-    const setFocused = focused => this.setState({focused})
+    const setFocused = value => this.setState({ value });
 
     return (
       <div className={`rsc ${className}`}>
@@ -733,8 +735,15 @@ class ChatBot extends Component {
             </div>
           </Footer>
         </ChatBotContainer>
-        <div className={ `keyboard-container ${focused ? "open" : "" }`}>
-          <Keyboard onKeyPress={this.handleKeyboardPress} preventMouseDownDefault={true} onChange={value => { setInputValue(value); }} onClick={e => { console.log(e, this.state.input); this.state.input.focus(); }} />
+        <div className={`keyboard-container ${focused ? 'open' : ''}`}>
+          <Keyboard
+            onKeyPress={this.handleKeyboardPress}
+            preventMouseDownDefault
+            onChange={value => {
+              setInputValue(value);
+            }}
+            onClick={() => input.focus()}
+          />
         </div>
       </div>
     );

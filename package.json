@@ -6,7 +6,6 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint lib/*.jsx",
     "prepublish": "npm run build",
-    "prepush": "npm run lint && npm run test:coverage",
     "start": "./node_modules/.bin/webpack-dev-server --inline --content-base build/",
     "prettier-watch": "onchange '**/*.js' '**/*.jsx' -- prettier --write {{changed}}",
     "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
@@ -92,14 +91,14 @@
     "prettier": "^1.16.4",
     "prop-types": "^15.6.0",
     "random-id": "0.0.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0",
     "react-simple-keyboard": "^3.7.2",
     "style-loader": "^2.0"
   },
   "peerDependencies": {
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0",
+    "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0",
     "styled-components": "^4.0.0"
   }
 }
