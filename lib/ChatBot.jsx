@@ -1,4 +1,6 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
+import Keyboard from 'react-simple-keyboard';
+import GlobalStyle from './common/globalStyle';
 import PropTypes from 'prop-types';
 import Random from 'random-id';
 import { CustomStep, OptionsStep, TextStep } from './steps_components';
@@ -20,10 +22,6 @@ import Recognition from './recognition';
 import { ChatIcon, CloseIcon, SubmitIcon, MicIcon } from './icons';
 import { isMobile } from './utils';
 import { speakFn } from './speechSynthesis';
-
-import Keyboard from 'react-simple-keyboard';
-import GlobalStyle from './common/globalStyle';
-
 
 class ChatBot extends Component {
   /* istanbul ignore next */
